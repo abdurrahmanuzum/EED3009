@@ -1,0 +1,72 @@
+\documentclass[12pt, a4paper]{article}
+
+%% Text related
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage[bottom]{footmisc}
+\usepackage{verbatim} %Adds comment blocks & code copy-paste
+\usepackage[ngerman, num]{isodate} %Proper date format ffs...
+    \monthyearsepgerman{}{}
+    \daymonthsepgerman{}{}
+\usepackage{enumitem}
+\usepackage{lipsum} %Because why not?
+
+%% Figure related
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{subfig}
+\usepackage[justification=centering]{caption} %Centers multiline captions
+
+%% Drawing stuff
+\usepackage{pgfplots}
+\usepackage[american]{circuitikz}
+
+%% Math & Scientific notations
+\usepackage{amsmath}
+\usepackage{amssymb} %amsmath doesn't have quite common math symbols for some reason
+\usepackage[per-mode=repeated-symbol, tight-spacing=true]{siunitx}
+
+%% Table related
+\usepackage{tabularx}
+\usepackage[thinlines]{easytable} %convenient
+\usepackage{booktabs} %for different horizontal lines
+\usepackage{array} %for table corners not meeting up - doesn't appear to work though
+
+%%
+\usepackage{subfiles}
+
+% pgfplots configurations
+\graphicspath{ {../img/} }
+\pgfplotsset{
+    compat=newest,
+    standard/.style={
+    axis x line=middle,
+    axis y line=middle,
+    every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+    every axis y label/.style={at={(current axis.above origin)},anchor=south}
+    }
+}
+
+\title{TITLE}
+\author{Abdurrahman ÜZÜM}
+\date{\today}
+
+\begin{document}
+
+    \maketitle
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lorem nunc, euismod a risus a,
+    facilisis pulvinar arcu. Donec hendrerit, felis sit amet lobortis ultricies, orci velit rhoncus 
+    ligula, ut consequat turpis tellus id ipsum. Donec semper ante sit amet purus porta feugiat. 
+    Nam semper ipsum vitae placerat auctor. Integer sit amet posuere nunc. Maecenas feugiat lacus 
+    nisi, at maximus sapien vehicula sit amet. Phasellus ultrices porta tellus, non vehicula quam 
+    dictum convallis. Praesent viverra orci a bibendum egestas. Vestibulum at finibus diam.
+
+
+    \subfile{sections/theory.tex}
+
+    \subfile{sections/application.tex}
+
+    \subfile{sections/conclusion.tex}
+
+\end{document}
