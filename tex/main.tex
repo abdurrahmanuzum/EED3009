@@ -27,6 +27,7 @@
 \usepackage[per-mode=repeated-symbol, tight-spacing=true]{siunitx}
 
 %% Table related
+\usepackage{multirow}
 \usepackage{tabularx}
 \usepackage[thinlines]{easytable} %convenient
 \usepackage{booktabs} %for different horizontal lines
@@ -46,6 +47,13 @@
     every axis y label/.style={at={(current axis.above origin)},anchor=south}
     }
 }
+
+% To place e.g. [ V ] so I don't bother typing it
+\newcommand{\unitV}{{\;[\,\SI{}{\volt}\,]}}
+\newcommand{\unitmA}{{\;[\,\SI{}{\milli\ampere}\,]}}
+\newcommand{\unitA}{{\;[\,\SI{}{\ampere}\,]}}
+\newcommand{\unitohm}{{\;[\,\SI{}{\ohm}\,]}}
+\newcommand{\unitkohm}{{\;[\,\SI{}{\kilo\ohm}\,]}}
 
 \title{TITLE}
 \author{Abdurrahman ÜZÜM}
