@@ -67,7 +67,22 @@
     \begin{titlepage}
         \begin{center}
 
-            \vspace*{1 cm}
+            \begin{figure}
+
+                \subfloat
+                {%
+                    \includegraphics[width=0.2\textwidth]{placeholder.png}
+                }
+                %
+                \hfill
+                %
+                \subfloat
+                {%
+                    \includegraphics[width=0.2\textwidth]{placeholder.png}
+                }
+
+            \end{figure}
+
             \textbf{T.C.\\}
             \textbf{DOKUZ EYLUL UNIVERSITY\\}
             \textbf{ENGINEERING FACULTY\\}
@@ -82,38 +97,166 @@
 
             \textbf{RANGE FINDER}
 
-            \begin{table}[H]
-                \begin{tabular*}{\textwidth}{c c}
-                    Elif Sezin ÖZYİĞİT  & Abdurrahman ÜZÜM \\
-                    2019502098          & 2019502099                    
-                \end{tabular*}
+        
+            \begin{table}[H]\centering
+                \begin{tabular}{cc}
+                    Elif Sezin ÖZYİĞİT \hspace{1cm}  & \hspace{1cm} Abdurrahman ÜZÜM \\
+                    2019502098         \hspace{1cm}  & \hspace{1cm} 2019502099       \\             
+                \end{tabular}
             \end{table}
 
 
-
-
-
-
-
-
-
         \end{center}
+
     \end{titlepage}
 
 
 
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lorem nunc, euismod a risus a,
-    facilisis pulvinar arcu. Donec hendrerit, felis sit amet lobortis ultricies, orci velit rhoncus 
-    ligula, ut consequat turpis tellus id ipsum. Donec semper ante sit amet purus porta feugiat. 
-    Nam semper ipsum vitae placerat auctor. Integer sit amet posuere nunc. Maecenas feugiat lacus 
-    nisi, at maximus sapien vehicula sit amet. Phasellus ultrices porta tellus, non vehicula quam 
-    dictum convallis. Praesent viverra orci a bibendum egestas. Vestibulum at finibus diam.
+    \pagebreak
+
+    \begin{abstract}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    \end{abstract}
+
+    \section{Overview of the Project}
+
+        This project focuses on measuring distances with no contact up to a meter. To realise this project a battery powered, handheld device will be designed. The device will utilise an ultrasonic speaker and microphone. It will send regular periodic ultrasonic bursts from the speaker and listen for the echoes. The necessary circuitry will measure the time between sent ultrasonic bursts and their respective echoes, following the time of flight (ToF) principle. This data will then be processed using necessary information such as the speed of sound on air, as a result of which, the distance data will be obtained. Finally, this distance value will be printed on a two digit display. The device will also employ a laser guide to assist proper alignment of the sensors, and also to provide a feedback to the user. 
 
 
-    \subfile{sections/theory.tex}
+        \subsection{Project Inputs}
 
-    \subfile{sections/application.tex}
+            \noindent The designed device must
+            \begin{itemize}
+                \item Measure distances in the range of 0-99\SI{}{\centi\metre}
+                \item Have an accuracy of \SI{1}{\centi\metre}
+                \item Be battery powered and handheld
+                \item Display the measured distance in real time on a two digit display.
+                \item Not emply an MCU or ASIC designed for this particular purpuse.
+            \end{itemize}
 
-    \subfile{sections/conclusion.tex}
+        \subsection{Design Overview}
+
+            
+            
+    \pagebreak
+    \section{Methodology}
+        There are various different possible and applicable approaches for the primary part of the project, the sensors. The first choice is whether to use an optical sensor, or an ultrasonic sensor.
+
+        \subsection{Sensor Types}
+
+            \subsubsection{Optical Sensors}
+                Optical sensors themselves have a variety of basis and operation principles, they are classified based on the wawelenght used and principle of operation. In terms of wawelenght most widely used and easily available sensors employ infrared frequencies. 
+
+
+                \bigskip\noindent
+                \textbf{IR - Triangulation Sensors}
+
+                    Commonly these sensors base their measurements on either of the following methods. The IR transmitter, commonly a simple narrow angle LED, continuously emmit light. The beam of light reflects at different angles at different distances, and as a result, falls on different portions of the position-sensitive photodetector (PSD). Knowing the distance between the transmitter and receiver, and calculating the angle of reflection based on where the light struct the receiver, the distance can be calculated using triangulation.
+
+                    \begin{figure}[H]\centering
+                        \includegraphics[width=\textwidth]{triangulation}
+                    \end{figure}
+
+                    These sensors 
+                    Applicable for daytime and nighttime usages (not really daytime, the sun can blind IR  sensors)
+
+                    Secured communication through a line of sight
+
+                    Able to measure the distance of objects that have complex surfaces unlike ultrasonic sensors
+
+                    Limited measurement range
+
+                    Affected by environmental conditions and hard objects
+                
+                \bigskip\noindent
+                \textbf{IR-ToF Sensors}
+
+                    More advanced IR sensors use the time-of-flight (ToF) principle. The emitter sends regular light pulses, a high precision timing circuitry keeps the time it takes for transmitted light to reflect and reach back to the receiver. Knowing the speed of light, distance can be mathematically obtained. These sensors are much less sensitive to the surface material and shape.
+
+                    Too expensive yaz bunu bir yere muhtemelen tabloya
+
+                    
+            
+            \subsubsection{Ultrasonic Sensors}
+                Ultrasonic sensors work similarly to ToF IR sensors, only instead of using electromagnetic waves, they utilise sound waves. These sensors also consist of a transmitter (speaker) and a receiver (microphone). Transmitter emmits high frequency ultrasonic sound waves as short bursts, and the receiver listens for echoes. A timing circuitry tracks the time between start of the outgoing burst and the incoming echoed burst. Knowing the speed of sound on air, the distance can easily be calculated.
+
+                Limited detection range
+
+                Low resolution 
+
+                Slow refresh rate (can not work on fast-moving targets)
+
+
+
+            \begin{table}[H]\centering
+                \begin{tabular}{|c|c|c|}
+                    \hline Type & IR & Ultrasonic \\
+                    \hline Source & reflected light waves & reflected sound waves \\
+                    \hline Applicable Surface & suitable to complex surfaces & not suitable to complex surfaces \\
+                    \hline
+                \end{tabular}
+            \end{table}
+
+
+
+        \subsubsection{Comparison}
+            In conclusion, IR-Triangulation sensors appear to be the best choice for the distances of interest and the resolution. However, compared to commonly available ultrasonic sensors, they are much more expensive. As a result, ultrasonic sensors have been selected as the preferred type of sensors for this device.
+
+            \textbf{A table like on the excel sheet can be put here.}
+
+
+    \subsection{Design Overview / Technical Feasibility}
+        
+        \textbf{Giriş girizgah çok boşta kaldı ne yazacğaımı bilemedim}
+        
+        \bigskip
+
+        \textbf{BLOCK DIAGRAM HERE MAYBE?}
+
+        \bigskip
+
+        Two ultrasonic transducers are needed, one for the transmitter and one for the receiver. The transmitter should be driven periodically with short pulses. The timing between these pulses is critical, such that the following pulse should not be transmitted before the echo of the previous pulse has arrived. This calculation should be made in consideration of the longest distance to be measured. Width of these pulses is also critical, as it should be short enough to ensure that the echo doesn't arrive before the pulse ends. This calculation should be made in considetation of the shortest distance of interest. 
+
+        Assuming that the longest distance to be measured is \SI{100}{\centi\metre}, and speed of sound is \SI{343}{\metre\per\second}, the echo would arrive after:
+
+        \begin{equation}
+            \texttt{max }t_f = 2 \times \frac{\SI{1}{\metre}}{\SI{343}{\metre\per\second}} = \SI{5.83}{\milli\second}
+        \end{equation}
+
+        \noindent Therefore the time between end of a pulse and start of the other should be around \SI{6}{\milli\second} minimum. 
+
+        \noindent Assuming that the shortest distance to be measured is \SI{1}{\centi\metre}, 
+
+        \begin{equation}
+            \texttt{min }t_f = 2 \times \frac{\SI{0.01}{\metre}}{\SI{343}{\metre\per\second}} = \SI{58.3}{\micro\second}
+        \end{equation}
+
+        \noindent Therefore the width of the pulse should not exceed about \SI{50}{\micro\second}.
+
+
+        \bigskip
+        Commonly available cheap ultrasonic transducers work at frequencies near \SI{40}{\kilo\hertz}. Therefore the transmitter should send bursts of \SI{40}{\kilo\hertz} sound waves, filling in the previously described pulse. In order to provide a signal with these properties, two generators are needed. One to generate the \SI{40}{\kilo\hertz} signal, and another to generate the pulses. The \SI{40}{\kilo\hertz} signal should then be connected to the transmitter via an analogue switch, which is driven by the pulses.
+
+        \bigskip
+        On the receiver side, the received signal will most likely be very low in amplitude, therefore the first stage is to amplify it. This amplification should be made such that the lowest possible echo should not fall short of the limits of the next stage, and the highest possible amplitude echo should not exceed it.
+        
+        \bigskip
+        After the amplification, the \SI{40}{\kilo\hertz} sound burst should be converted into a regular pulse with digital voltage levels. This can be done with a simple envelope detector, and slow rising/falling edges can be converted to digital edges using a logic buffer. 
+
+        \bigskip
+        After converting the echo burst into a digital pulse, timing measurements can be done. A counter that is to be started simultaneously with the first edge of the transmitted burst, should then be stopped by the first edge of the echo signal. Output of the counter is proportional to the distance, however, it is necessary to convert it into proper units. For which an arithmetic circuit should follow the counter.
+
+        \bigskip
+        After obtaining the meaningful distance data, it then can be transferred to the 7-segment displays. A binary to 7 segment display driver can be employed here for simplicity.
+
+
+        
+
+
+            
+
+
+
+
 
 \end{document}
