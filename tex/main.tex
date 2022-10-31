@@ -281,14 +281,56 @@
         \end{figure}
 
 
-        In order to find the characteristic / the working principle of the sensor actual sensors on the board are directly used
 
-        Transducers will be removed from the module and attached to an empty pertinax
-        10Vpp 40 kHz sinusoidal signal will be given to the transmitter directly from the signal generator
-        Differential signal will be received from the receiver with double probe
-        The sent and incoming signal will be compared in frequency and amplitude.
+        \pagebreak
+        In order to test the behaviours of transducers, they are desoldered from the module and soldered back on an empty prototyping board. It is necessary to measure what the received signal amplitude will be in order to design a proper amplifier.
 
-        Both sensors are placed on the pertinax with their dotted legs on the left when viewed from the front.
+        $\SI{10}{\volt}_{\texttt{pp}}$ \SI{40}{\kilo\hertz} sinusoidal signal is applied to the transmitter directly from a function generator and output of the receiver is measured using the oscilloscope. Amplitude of the received signal is observed at various distances. 
+
+        It is observed that the received signal amplitude drops below \SI{100}{\milli\volt} for very large distances (not shown on the pictures). At about 40-50 \SI{}{\centi\metre}, the signal amplitude is about \SI{200}{\milli\volt}, and for very close distances at about 5-10 \SI{}{\centi\metre}, amplitude reaches \SI{800}{\milli\volt}. 
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=\textwidth]{experiment2/setup.jpg}
+            \caption[]{Experiment setup}\label{fig:setup}
+        \end{figure}
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=0.5\textwidth]{experiment2/near.jpg}
+            \caption[]{}\label{fig:near}
+        \end{figure}
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=\textwidth]{experiment2/near_scope.png}
+            \caption[]{}\label{fig:ner_scope}
+        \end{figure}
+
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=0.5\textwidth]{experiment2/medium.jpg}
+            \caption[]{}\label{fig:medium}
+        \end{figure}
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=\textwidth]{experiment2/medium_scope.png}
+            \caption[]{}\label{fig:medium_scope}
+        \end{figure}
+
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=0.5\textwidth]{experiment2/far.jpg}
+            \caption[]{}\label{fig:far}
+        \end{figure}
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=\textwidth]{experiment2/far_scope.png}
+            \caption[]{}\label{fig:far_scope}
+        \end{figure}
+
+
+        
+
+
+
 
 
     
