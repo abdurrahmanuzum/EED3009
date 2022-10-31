@@ -200,12 +200,6 @@
     \subsection{Design Overview}
         
         \textbf{Giriş girizgah çok boşta kaldı ne yazacğaımı bilemedim}
-        
-        \bigskip
-
-        
-
-        \bigskip
 
         Two ultrasonic transducers are needed, one for the transmitter and one for the receiver. The transmitter should be driven periodically with short pulses. The timing between these pulses is critical, such that the following pulse should not be transmitted before the echo of the previous pulse has arrived. This calculation should be made in consideration of the longest distance to be measured. Width of these pulses is also critical, as it should be short enough to ensure that the echo doesn't arrive before the pulse ends. This calculation should be made in considetation of the shortest distance of interest. 
 
@@ -257,6 +251,46 @@
 
 
     \section{Technical Feasibility}
+
+        Since HCSR-04 is a cheap and commonly available product it is easier to desolder and salvage the ultrasonic transduces out of it, instead of looking for parts. However, the transducers are not labelled, marked or named, therefore it is not possible to find relevant information about them. Instead, a working HCSR-04 module is put under test and the signal driving the transmitter of the device is observed with an oscilloscope. 
+
+        \noindent On these images, each channel of the scope is connected to one pin of the transmitter, and the purple waveform is the difference between them.
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=0.8\textwidth]{placeholder.png}
+            \caption[]{Pulses}\label{fig:pulses}
+        \end{figure}
+
+        \noindent As it can be seen, the transmitter is driven with periodic, short pulses. Here, it should be kept in mind that this device uses a microcontroller and tries to be smart, it lenghtens the time between pulses when the distance is longer, and shortens it for shorter distances. Therefore the duration between pulses is not really reliable for this experiement. 
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=0.8\textwidth]{experiment1/pulses_close.png}
+            \caption[]{Pulses}\label{fig:pulses}
+        \end{figure}
+
+        \noindent Here, when zoomed into the short bursts, the \SI{40}{\kilo\hertz} ultrasonic frequency signal can be seen. Note that the transmitter is driven symetrically, but the sensor is powered with positive \SI{5}{\volt}, therefore the module has decided to drive the transmitter with alternating \SI{5}{\volt} square pulses on either pin and obtaining a symmetrical \SI{10}{\volt} square wave. 
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=0.8\textwidth]{experiment1/pulses_duration.png}
+            \caption[]{Pulses}\label{fig:pulses}
+        \end{figure}
+
+        \begin{figure}[H]\centering
+            \includegraphics[width=0.8\textwidth]{experiment1/ultrasonic_freq_amplt.png}
+            \caption[]{Pulses}\label{fig:pulses}
+        \end{figure}
+
+
+        In order to find the characteristic / the working principle of the sensor actual sensors on the board are directly used
+
+        Transducers will be removed from the module and attached to an empty pertinax
+        10Vpp 40 kHz sinusoidal signal will be given to the transmitter directly from the signal generator
+        Differential signal will be received from the receiver with double probe
+        The sent and incoming signal will be compared in frequency and amplitude.
+
+        Both sensors are placed on the pertinax with their dotted legs on the left when viewed from the front.
+
+
     
     \section{Cost Analysis}
 
