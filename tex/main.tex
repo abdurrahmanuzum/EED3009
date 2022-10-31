@@ -163,18 +163,6 @@
                     \begin{figure}[H]\centering
                         \includegraphics[width=0.5\textwidth]{triangulation}
                     \end{figure}
-
-                    These sensors 
-
-                    Applicable for daytime and nighttime usages (not really daytime, the sun can blind IR  sensors)
-
-                    Secured communication through a line of sight
-
-                    Able to measure the distance of objects that have complex surfaces unlike ultrasonic sensors
-
-                    Limited measurement range
-
-                    Affected by environmental conditions and hard objects
                 
                 \bigskip\noindent
                 \textbf{IR-ToF Sensors}
@@ -186,17 +174,19 @@
             \subsubsection{Ultrasonic Sensors}
                 Ultrasonic sensors work similarly to ToF IR sensors, only instead of using electromagnetic waves, they utilise sound waves. These sensors also consist of a transmitter (speaker) and a receiver (microphone). Transmitter emmits high frequency ultrasonic sound waves as short bursts, and the receiver listens for echoes. A timing circuitry tracks the time between start of the outgoing burst and the incoming echoed burst. Knowing the speed of sound on air, the distance can easily be calculated.
 
-                Limited detection range
+                \begin{figure}[H]\centering
+                    \includegraphics[width=0.8\textwidth]{ultrasonic.png}
+                \end{figure}
 
-                Low resolution 
 
-                Slow refresh rate (can not work on fast-moving targets)
 
 
         \subsubsection{Comparison}
             In conclusion, IR-Triangulation sensors appear to be the best choice for the distances of interest and the resolution. However, compared to commonly available ultrasonic sensors, they are much more expensive. As a result, ultrasonic sensors have been selected as the preferred type of sensors for this device.
 
-            \textbf{A table like on the excel sheet can be put here.}
+            \begin{figure}[H]\centering
+                \includegraphics[width=\textwidth]{comparison.png}
+            \end{figure}
 
 
     \pagebreak
@@ -264,7 +254,7 @@
     \section{Risk Feasibility}
 
     \section{Gannt Chart}
-    
+
 
 
             
