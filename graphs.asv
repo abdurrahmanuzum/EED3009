@@ -4,9 +4,9 @@ clc;
 
 
 pulse_period = 1e-3;
-dur = 50*pulse_period;
-points = 100e3;
-t = linspace(0, dur, points);
+dur = 2*pulse_period;
+
+t = linspace(0, 2*pulse_period, 10e3);
 
 ramp = (1/pulse_period) * mod(t+pulse_period/2, pulse_period); 
 
@@ -21,7 +21,8 @@ wave = A*sin(2*pi*f_sin*t);
 
 signal = wave .* pulse;
 
-siglp = signal - R*C*
+siglp = lowpass(signal, 10e3,  );
+plot(t, siglp);
 
 
 % 
