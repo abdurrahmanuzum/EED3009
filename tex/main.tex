@@ -108,7 +108,7 @@
                 \end{tabular}
             \end{table}
 
-            Instructor:\\ Dr.Ogr.Uy.Metehan MAKİNACI\\
+            Instructor:\\ Dr.Ogr.Uy.Neslihan AVCU\\
 
             \vspace*{1 cm}
             November, 2022
@@ -118,12 +118,14 @@
 
     \end{titlepage}
 
-
+    \pagebreak
+    
+    \tableofcontents
 
     \pagebreak
 
     \begin{abstract}
-        Early societies measured distance with a variety of primitive tools, from basic paces to measuring rods and marked ropes. Luckily, we’ve come a long way from the days of using belts, thumbs and cubits for measurement. Various methods have been developed over the years in order to increase the measurement accuracy and to be able to measure in various conditions. These devices, which have been developed by human beings step by step over the years and evolved with new technologies, have reached the level where they can measure without the need for physical contact or even light.
+        Early societies measured distance with a variety of primitive tools, from basic paces to measuring rods and marked ropes.\cite{abstract} Luckily, we’ve come a long way from the days of using belts, thumbs and cubits for measurement. Various methods have been developed over the years in order to increase the measurement accuracy and to be able to measure in various conditions. These devices, which have been developed by human beings step by step over the years and evolved with new technologies, have reached the level where they can measure without the need for physical contact or even light.
     \end{abstract}
 
     \section{Overview of the Project}
@@ -133,7 +135,7 @@
 
         \subsection{Project Inputs}
 
-            \noindent The designed device must
+            \noindent The designed device must follow the above guidelines and accomplish these aims. 
             \begin{itemize}
                 \item Measure distances in the range of 0-99\SI{}{\centi\metre}
                 \item Have an accuracy of \SI{1}{\centi\metre}
@@ -142,50 +144,50 @@
                 \item Not empoly an MCU or ASIC designed for this particular purpuse.
             \end{itemize}
 
+            \noindent In terms of measurement accuracy and range, the given properties can evolve as the experiments and tests continue, and therefore are subject to change. 
+
         
     \pagebreak
-    \section{Methodology}
+    \section{Approaches}
         There are various different possible and applicable approaches for the primary part of the project, the sensors. The first choice is whether to use an optical sensor, or an ultrasonic sensor.
 
-        \subsection{Sensor Types}
-
-            \subsubsection{Optical Sensors}
-                Optical sensors themselves have a variety of basis and operation principles, they are classified based on the wawelenght used and principle of operation. In terms of wawelenght most widely used and easily available sensors employ infrared frequencies. 
+        \subsection{Optical Sensors}
+            Optical sensors themselves have a variety of basis and operation principles, they are classified based on the wawelenght used and principle of operation. In terms of wawelenght most widely used and easily available sensors employ infrared frequencies. 
 
 
-                \bigskip\noindent
-                \textbf{IR - Triangulation Sensors}
+            \bigskip\noindent
+            \textbf{IR - Triangulation Sensors}
 
-                    Commonly these sensors base their measurements on either of the following methods. The IR transmitter, commonly a simple narrow angle LED, continuously emmit light. The beam of light reflects at different angles at different distances, and as a result, falls on different portions of the position-sensitive photodetector (PSD). Knowing the distance between the transmitter and receiver, and calculating the angle of reflection based on where the light struct the receiver, the distance can be calculated using triangulation.
-
-                    \begin{figure}[H]\centering
-                        \includegraphics[width=0.5\textwidth]{triangulation}
-                        \caption[]{IR Triangulation sensor working principle.}\label{fig:triangulation}
-                    \end{figure}
-                
-                \bigskip\noindent
-                \textbf{IR-ToF Sensors}
-
-                    More advanced IR sensors use the time-of-flight (ToF) principle. The emitter sends regular light pulses, a high precision timing circuitry keeps the time it takes for transmitted light to reflect and reach back to the receiver. Knowing the speed of light, distance can be mathematically obtained. These sensors are much less sensitive to the surface material and shape. However, typically optical ToF sensors are much more expensive compared to other types.
-
-                IR sensors can measure the distance of objects with complex surfaces, even if they are affected by environmental conditions and have limited me
-
-                    
-            
-            \subsubsection{Ultrasonic Sensors}
-                Ultrasonic sensors work similarly to ToF IR sensors, only instead of using electromagnetic waves, they utilise sound waves. These sensors also consist of a transmitter (speaker) and a receiver (microphone). Transmitter emmits high frequency ultrasonic sound waves as short bursts, and the receiver listens for echoes. A timing circuitry tracks the time between start of the outgoing burst and the incoming echoed burst. Knowing the speed of sound on air, the distance can easily be calculated.
-
-                Ultrasonic sensors, even with low resolution and slow refresh rate, are really useful because of their long range and low cost.
+                Commonly these sensors base their measurements on either of the following methods. The IR transmitter, commonly a simple narrow angle LED, continuously emmit light. The beam of light reflects at different angles at different distances, and as a result, falls on different portions of the position-sensitive photodetector (PSD). Knowing the distance between the transmitter and receiver, and calculating the angle of reflection based on where the light struct the receiver, the distance can be calculated using triangulation.
 
                 \begin{figure}[H]\centering
-                    \includegraphics[width=0.8\textwidth]{ultrasonic.png}
-                    \caption[]{Ultrasonic ToF sensor working principle.}\label{fig:ultrasonic}
+                    \includegraphics[width=0.5\textwidth]{triangulation}
+                    \caption[]{IR Triangulation sensor working principle.\cite{triangulation}}\label{fig:triangulation}
                 \end{figure}
+            
+            \bigskip\noindent
+            \textbf{IR-ToF Sensors}
+
+                More advanced IR sensors use the time-of-flight (ToF) principle. The emitter sends regular light pulses, a high precision timing circuitry keeps the time it takes for transmitted light to reflect and reach back to the receiver. Knowing the speed of light, distance can be mathematically obtained. These sensors are much less sensitive to the surface material and shape. However, typically optical ToF sensors are much more expensive compared to other types.
+
+            IR sensors can measure the distance of objects with complex surfaces, even if they are affected by environmental conditions and have limited me
+
+                
+        
+        \subsection{Ultrasonic Sensors}
+            Ultrasonic sensors work similarly to ToF IR sensors, only instead of using electromagnetic waves, they utilise sound waves. These sensors also consist of a transmitter (speaker) and a receiver (microphone). Transmitter emmits high frequency ultrasonic sound waves as short bursts, and the receiver listens for echoes. A timing circuitry tracks the time between start of the outgoing burst and the incoming echoed burst. Knowing the speed of sound on air, the distance can easily be calculated.
+
+            Ultrasonic sensors, even with low resolution and slow refresh rate, are really useful because of their long range and low cost.
+
+            \begin{figure}[H]\centering
+                \includegraphics[width=0.8\textwidth]{ultrasonic.png}
+                \caption[]{Ultrasonic ToF sensor working principle.\cite{tof}}\label{fig:ultrasonic}
+            \end{figure}
 
 
 
-
-        \subsubsection{Comparison}
+        \pagebreak
+        \subsection{Comparison}
             In conclusion, IR-Triangulation sensors appear to be the best choice for the distances of interest and the resolution. However, compared to commonly available ultrasonic sensors, they are much more expensive. Due to the reasons mentioned, IR triangular sensors were not considered suitable for the project. Comparing the remaining two options, as tabulated below, clearly shows that the ultrasonic sensor is the better option for the project. Since it was desired to construct a new PCB designed for transducers and to realize the project that way, the idea of designing blocks for an ultrasonic sensor was more attractive and challenging  in personal. The use of ultrasonic sensors makes more sense, both technically and personally.
 
             \begin{table}[H]\centering
@@ -195,9 +197,11 @@
 
 
     \pagebreak
-    \subsection{Design Overview}
+    \section{Methodology}
         
-        \textbf{Giriş girizgah çok boşta kaldı ne yazacğaımı bilemedim}
+        Guidelines of distance measurement using ultrasonic sensors is relatively straight forward. All the device should do is to send sound signals, wait for the echoes arrive and measure the time between. Since transmitting a continuous signal would produce a continuous echo, it is not possible to keep track of the time. Therefore the transmitter should emit bursts of sound waves, and the receiver should keep track of the time between.
+
+        \bigskip 
 
         Two ultrasonic transducers are needed, one for the transmitter and one for the receiver. The transmitter should be driven periodically with short pulses. The timing between these pulses is critical, such that the following pulse should not be transmitted before the echo of the previous pulse has arrived. This calculation should be made in consideration of the longest distance to be measured. Width of these pulses is also critical, as it should be short enough to ensure that the echo doesn't arrive before the pulse ends. This calculation should be made in considetation of the shortest distance of interest. 
 
@@ -221,11 +225,11 @@
         \bigskip
         Commonly available cheap ultrasonic transducers work at frequencies near \SI{40}{\kilo\hertz}. Therefore the transmitter should send bursts of \SI{40}{\kilo\hertz} sound waves, filling in the previously described pulse. In order to provide a signal with these properties, two generators are needed. One to generate the \SI{40}{\kilo\hertz} signal, and another to generate the pulses. The \SI{40}{\kilo\hertz} signal should then be connected to the transmitter via an analogue switch, which is driven by the pulses.
 
-        \bigskip
+        \pagebreak
         On the receiver side, the received signal will most likely be very low in amplitude, therefore the first stage is to amplify it. This amplification should be made such that the lowest possible echo should not fall short of the limits of the next stage, and the highest possible amplitude echo should not exceed it.
         
         \bigskip
-        After the amplification, the \SI{40}{\kilo\hertz} sound burst should be converted into a regular pulse with digital voltage levels. This can be done with a simple envelope detector, and slow rising/falling edges can be converted to digital edges using a logic buffer. 
+        After the amplification, the \SI{40}{\kilo\hertz} sound burst should be converted into a regular pulse with digital voltage levels. To accomplish this, firstly the signal should be passed though a lowpass filter with appropriate passband frequency. After which, the signal will resemble a single pulse, albeit with slow-rising edges. Feeding this signal into a logical buffer/schmitt-trigger, the pulse can be converted into a true digital pulse. 
 
         \bigskip
         After converting the echo burst into a digital pulse, timing measurements can be done. A counter that is to be started simultaneously with the first edge of the transmitted burst, should then be stopped by the first edge of the echo signal. Output of the counter is proportional to the distance, however, it is necessary to convert it into proper units. For which an arithmetic circuit should follow the counter.
@@ -253,6 +257,8 @@
         Since HCSR-04 is a cheap and commonly available product it is easier to desolder and salvage the ultrasonic transduces out of it, instead of looking for parts. However, the transducers are not labelled, marked or named, therefore it is not possible to find relevant information about them. Instead, a working HCSR-04 module is put under test and the signal driving the transmitter of the device is observed with an oscilloscope. 
 
         \noindent On these images, each channel of the scope is connected to one pin of the transmitter, and the purple waveform is the difference between them.
+
+        \bigskip
 
         \begin{figure}[H]\centering
             \includegraphics[width=0.8\textwidth]{experiment1/pulses.png}
@@ -343,6 +349,13 @@
 
     \section{Risk Feasibility}
 
+        \begin{itemize}
+            \item Since there is not a commonly available specific IC to perform necessary calculation and using an MCU is not allowed, this stage can be tricky to realise.
+            \item Necessary circuitry may be more complex than expected, such that the required design revisions can take too long.
+            \item The received signal may be more noisy than expected, especially in long-range measurements. 
+            \item If the adequate precautions and filtrations are not taken, it can be observed that the margin of error may increase more than allowed.
+        \end{itemize}   
+
     \pagebreak
     \section{Gannt Chart}
 
@@ -356,6 +369,22 @@
 
 
 
+    
+
+
+    \begin{thebibliography}{}	
+        \bibitem{abstract}
+        https://www.encyclopedia.com/education/news-wires-white-papers-and-books/distance-measurement
+
+        \bibitem{triangulation}
+        https://www.seeedstudio.com/blog/2019/12/23/distance-sensors-types-and-selection-guide/
+
+        \bibitem{tof}
+        https://www.sensorpartners.com/en/knowledge-base/everything-about-the-operation-principles-of-ultrasonic-sensors/ 
+        
+        \bibitem{}
+        \textit{Mubina Toa, Akeem Whitehead}, \textbf{\textit{``Ultrasonic Sensing Basics''}}, Texas Instruments
+    \end{thebibliography}
             
 
 
