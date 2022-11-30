@@ -155,16 +155,17 @@
             \caption[]{Revised Block Diagram}
         \end{figure}
 
-       \pagebreak
-        
+        \bigskip
+        Guidelines of distance measurement using ultrasonic sensors is relatively straight forward. All the device should do is to send sound signals, wait for the echoes arrive and measure the time between. Since transmitting a continuous signal would produce a continuous echo, it is not possible to keep track of the time. Therefore the transmitter should emit bursts of sound waves, and the receiver should keep track of the time between.
+
+        \bigskip 
+        Two ultrasonic transducers are needed, one for the transmitter and one for the receiver. The transmitter should be driven periodically with short pulses. The timing between these pulses is critical, such that the following pulse should not be transmitted before the echo of the previous pulse has arrived. This calculation should be made in consideration of the longest distance to be measured. Width of these pulses is also critical, as it should be short enough to ensure that the echo doesn't arrive before the pulse ends. This calculation should be made in considetation of the shortest distance of interest. 
+    
+
+    \pagebreak    
     \section{Methodology}
     
-    Guidelines of distance measurement using ultrasonic sensors is relatively straight forward. All the device should do is to send sound signals, wait for the echoes arrive and measure the time between. Since transmitting a continuous signal would produce a continuous echo, it is not possible to keep track of the time. Therefore the transmitter should emit bursts of sound waves, and the receiver should keep track of the time between.
-
-    \bigskip 
-
-    Two ultrasonic transducers are needed, one for the transmitter and one for the receiver. The transmitter should be driven periodically with short pulses. The timing between these pulses is critical, such that the following pulse should not be transmitted before the echo of the previous pulse has arrived. This calculation should be made in consideration of the longest distance to be measured. Width of these pulses is also critical, as it should be short enough to ensure that the echo doesn't arrive before the pulse ends. This calculation should be made in considetation of the shortest distance of interest. 
-
+   
     Assuming that the longest distance to be measured is \SI{100}{\centi\metre}, and speed of sound is \SI{343}{\metre\per\second}, the echo would arrive after:
 
     \begin{equation}
@@ -197,20 +198,8 @@
     \bigskip
     After obtaining the meaningful distance data, it then can be transferred to the 7-segment displays. A binary to 7 segment display driver can be employed here for simplicity.
 
-    \pagebreak
-    \begin{landscape}\centering
-        \vspace*{1.8cm}
-        \begin{figure}[H]\centering
-            \makebox[\linewidth]
-            {
-                \includegraphics[width=1.2\linewidth]{block2.png}
-            }
-            \caption{Block Diagram}
-        \end{figure}
-    \end{landscape}
-    \vfill
-    \pagebreak
 
+    \pagebreak
 
     \section{Technical Feasibility}
 
@@ -322,7 +311,7 @@
         \begin{figure}[H]\centering
             \makebox[\linewidth]
                 {
-                    \includegraphics[width=1.2\linewidth]{ganntchart.png}
+                    \includegraphics[width=1.2\linewidth]{Gantt_Chart_v2.png}
                 }
                 \caption{Gannt Chart}
         \end{figure}
