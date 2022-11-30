@@ -169,39 +169,18 @@
 	Synthesizing sinusoidal waves is rather involved and hard. This is usually done digitally by the help of microcontrollers. Since this project does not allow the use of microcontrollers, and there are no readily available sinusoidal signal generator IC’s, it has been decided that driving the transmitter with square waves will suffice. This is also how the HCSR04 module was operating. Refer to the feasibility report Section 4 Figure 5 .
 	
 	\bigskip
-	It is better to drive the transducer via a symmetrical wave, in order to use full swing range of the device. However, since the circuit will be powered via a 9V battery, there won’t be a negative rail. To accomplish this, H BRIDGE EXPLANATION
+	It is better to drive the transducer via a symmetrical wave, in order to use full swing range of the device. However, since the circuit will be powered via a 9V battery, there won’t be a negative rail. To switch the polarity of voltage H bridge is used. 
 	
+	 \bigskip
+    Commonly available cheap ultrasonic transducers work at frequencies near \SI{40}{\kilo\hertz}. Therefore the transmitter should send bursts of \SI{40}{\kilo\hertz} sound waves, filling in the previously described pulse. In order to provide a signal with these properties, two generators are needed. One to generate the \SI{40}{\kilo\hertz} signal, and another to generate the pulses.  BU SON PARAGRAFI YEDİRMELİSİN. veya sil.
 	\subsection{Burst Generation}
 	Since transmitting a continuous signal would produce a continuous echo, it is not possible to keep track of the time. Therefore the transmitter should emit bursts of sound waves, and the receiver should keep track of the time between.
-
-To accomplish this, another 555 can be used in astable mode with adjustable duty cycle.
+ 	
+	\bigskip
+	To accomplish this, another 555 can be used in astable mode with adjustable duty cycle.
 	
-	\subsection{Transmitter Driver}
-	After obtaining the power requirements of the transmitter, a separate driver IC may be concluded to be necessary. In such case, a simple power amplifier / audio opamp can be used to deliver the necessary power to the transmitter. This driver should be selected such that it is able to operate at the ultrasonic frequencies without distortion. Since the transmitter is driven via two separate timer circuits, two power amplifiers are needed. 
-	
-	\subsection{Receiver Amplifier}
-	During the transmission of the signal, it gets weaker. Since the received signal will be small in amplitude, in order to compensate this loss, it must be amplified to be used in the following blocks.
-	
-	\subsection{Low Pass Filter}
-	Since the incoming echo signal will be a frequency modulated signal, where it consists of an ultrasonic burst filling a pulse, in order to obtain the actual waveform, it is necessary to pass the signal through a low pass filter. After this stage, the ultrasonic part will be discarded and following stages will see only the outlining pulse. This LPF can be a simple passive RC LPF.
-	
-	A passive first order RC low pass filter is designed with corner frequency fc ~= 5kHz. Where input signal consists of a 40kHz carrier and 150 Hz \%0.3 duty pulses. Passing this signal through a LPF enables it to be further passed though a schmitt trigger and recover the digital pulse, resulting in clean fast rising and falling edges, sufficient to trigger the counter.
-
-To encounter attenuation, a schottky diode is placed to prevent capacitor to be discharged over lower value programming resistor, whose value is fixed to get necessary corner frequency. Instead, a bigger bleeder resistor is added in parallel with the capacitor. This allows output signal to rise relatively quickly though the LPF resistor, during “on” times of the input signal, and prevents it discharge though the same resistor during “off” times, and therefore decrease the inevitable attenuation, increasing the voltage level sufficient enough to drive the input of 5V logic schmitt trigger.
-	
-	\subsection{Low Pass Filter}
-	After the LPF, even though the signal will resemble a pulse, it still will be an analogue signal, with slow rising/falling edges and an ambiguous amplitude value. To digitise the signal, it can be fed through a logical schmitt-trigger, output of which will be a truly digital signal. This can be accomplished using generic schmitt-trigger IC such as 74HC14.
-
-	Even though the amplitude value does contain information about surface type and angle, these informations are beyond the scope of this project and therefore can be discarded without any problems in this stage.
-	
-	\subsection{Counter}
-	
-	\subsection{Display Driver}
-	After obtaining a binary representation of distance at the output of the counter, this should be translated in an apropriate with which the 7-segment displays can  be driven. This can be accomplished by means of using a generic “binary to 7-segment” display driver IC such as 74HC4543.
-	
-    
-   \pagebreak
-    Assuming that the longest distance to be measured is \SI{100}{\centi\metre}, and speed of sound is \SI{343}{\metre\per\second}, the echo would arrive after:
+	\bigskip
+	 Assuming that the longest distance to be measured is \SI{100}{\centi\metre}, and speed of sound is \SI{343}{\metre\per\second}, the echo would arrive after:
 
     \begin{equation}
         \texttt{max }t_f = 2 \times \frac{\SI{1}{\metre}}{\SI{343}{\metre\per\second}} = \SI{5.83}{\milli\second}
@@ -218,21 +197,40 @@ To encounter attenuation, a schottky diode is placed to prevent capacitor to be 
     \noindent Therefore the width of the pulse should not exceed about \SI{50}{\micro\second}.
 
 
-    \bigskip
-    Commonly available cheap ultrasonic transducers work at frequencies near \SI{40}{\kilo\hertz}. Therefore the transmitter should send bursts of \SI{40}{\kilo\hertz} sound waves, filling in the previously described pulse. In order to provide a signal with these properties, two generators are needed. One to generate the \SI{40}{\kilo\hertz} signal, and another to generate the pulses. The \SI{40}{\kilo\hertz} signal should then be connected to the transmitter via an analogue switch, which is driven by the pulses.
-    
-    \bigskip
+	\subsection{Transmitter Driver}
+	After obtaining the power requirements of the transmitter, a separate driver IC may be concluded to be necessary. In such case, a simple power amplifier / audio opamp can be used to deliver the necessary power to the transmitter. This driver should be selected such that it is able to operate at the ultrasonic frequencies without distortion. Since the transmitter is driven via two separate timer circuits, two power amplifiers are needed. 
+	
+	\subsection{Receiver Amplifier}
+	During the transmission of the signal, it gets weaker. Since the received signal will be small in amplitude, in order to compensate this loss, it must be amplified to be used in the following blocks.
+	
+	 \bigskip
     On the receiver side, the received signal will most likely be very low in amplitude, therefore the first stage is to amplify it. This amplification should be made such that the lowest possible echo should not fall short of the limits of the next stage, and the highest possible amplitude echo should not exceed it.
+
+	
+	\subsection{Low Pass Filter}
+	Since the incoming echo signal will be a frequency modulated signal, where it consists of an ultrasonic burst filling a pulse, in order to obtain the actual waveform, it is necessary to pass the signal through a low pass filter. After this stage, the ultrasonic part will be discarded and following stages will see only the outlining pulse. This LPF can be a simple passive RC LPF.
+	
+	A passive first order RC low pass filter is designed with corner frequency fc ~= 5kHz. Where input signal consists of a 40kHz carrier and 150 Hz \%0.3 duty pulses. Passing this signal through a LPF enables it to be further passed though a schmitt trigger and recover the digital pulse, resulting in clean fast rising and falling edges, sufficient to trigger the counter.
+
+To encounter attenuation, a schottky diode is placed to prevent capacitor to be discharged over lower value programming resistor, whose value is fixed to get necessary corner frequency. Instead, a bigger bleeder resistor is added in parallel with the capacitor. This allows output signal to rise relatively quickly though the LPF resistor, during “on” times of the input signal, and prevents it discharge though the same resistor during “off” times, and therefore decrease the inevitable attenuation, increasing the voltage level sufficient enough to drive the input of 5V logic schmitt trigger.
+	
+	\subsection{Rectifier/Logical Buffer}
+	After the LPF, even though the signal will resemble a pulse, it still will be an analogue signal, with slow rising/falling edges and an ambiguous amplitude value. To digitise the signal, it can be fed through a logical schmitt-trigger, output of which will be a truly digital signal. This can be accomplished using generic schmitt-trigger IC such as 74HC14.
+
+	Even though the amplitude value does contain information about surface type and angle, these informations are beyond the scope of this project and therefore can be discarded without any problems in this stage.
+	
+	\subsection{Counter}
+	
+    After converting the echo burst into a digital pulse, timing measurements can be done. A counter that is to be started simultaneously with the first edge of the transmitted burst, should then be stopped by the first edge of the echo signal. Output of the counter is proportional to the distance, however, it is necessary to convert it into proper units. For which an arithmetic circuit should follow the counter.
+	
+	    
+   \pagebreak
+   
+   
     
+       
     \bigskip
     After the amplification, the \SI{40}{\kilo\hertz} sound burst should be converted into a regular pulse with digital voltage levels. To accomplish this, firstly the signal should be passed though a lowpass filter with appropriate passband frequency. After which, the signal will resemble a single pulse, albeit with slow-rising edges. Feeding this signal into a logical buffer/schmitt-trigger, the pulse can be converted into a true digital pulse. 
-
-    \bigskip
-    After converting the echo burst into a digital pulse, timing measurements can be done. A counter that is to be started simultaneously with the first edge of the transmitted burst, should then be stopped by the first edge of the echo signal. Output of the counter is proportional to the distance, however, it is necessary to convert it into proper units. For which an arithmetic circuit should follow the counter.
-
-    \bigskip
-    After obtaining the meaningful distance data, it then can be transferred to the 7-segment displays. A binary to 7 segment display driver can be employed here for simplicity.
-
 
     \pagebreak
 
