@@ -1,8 +1,17 @@
 \contentsline {section}{\numberline {1}Introduction}{2}{}%
 \contentsline {section}{\numberline {2}Objectives of the Project}{2}{}%
 \contentsline {section}{\numberline {3}Overview of the Project}{3}{}%
-\contentsline {section}{\numberline {4}Methodology}{4}{}%
-\contentsline {section}{\numberline {5}Technical Feasibility}{7}{}%
-\contentsline {section}{\numberline {6}Cost Analysis}{14}{}%
-\contentsline {section}{\numberline {7}Risk Feasibility}{14}{}%
-\contentsline {section}{\numberline {8}Gannt Chart}{15}{}%
+\contentsline {section}{\numberline {4}Design and Methodology}{4}{}%
+\contentsline {subsection}{\numberline {4.1}Ultrasonic Frequency Synthesis}{4}{}%
+\contentsline {subsection}{\numberline {4.2}Burst Generation}{4}{}%
+\contentsline {subsection}{\numberline {4.3}Transmitter Driver}{4}{}%
+\contentsline {subsection}{\numberline {4.4}Receiver Amplifier}{4}{}%
+\contentsline {subsection}{\numberline {4.5}Low Pass Filter}{5}{}%
+\contentsline {subsection}{\numberline {4.6}Low Pass Filter}{5}{}%
+\contentsline {subsection}{\numberline {4.7}Counter}{5}{}%
+\contentsline {subsection}{\numberline {4.8}Display Driver}{5}{}%
+\contentsline {section}{\numberline {5}Results}{8}{}%
+\contentsline {section}{\numberline {6}Needs of the Project / BOMList}{9}{}%
+\contentsline {section}{\numberline {7}Discussion}{10}{}%
+\contentsline {section}{\numberline {8}Conclusion}{11}{}%
+\contentsline {section}{\numberline {9}Gannt Chart}{12}{}%

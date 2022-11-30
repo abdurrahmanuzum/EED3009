@@ -163,9 +163,44 @@
     
 
     \pagebreak    
-    \section{Methodology}
+    \section{Design and Methodology}
+    	\subsection{Ultrasonic Frequency Synthesis}
+	
+	Synthesizing sinusoidal waves is rather involved and hard. This is usually done digitally by the help of microcontrollers. Since this project does not allow the use of microcontrollers, and there are no readily available sinusoidal signal generator IC’s, it has been decided that driving the transmitter with square waves will suffice. This is also how the HCSR04 module was operating. Refer to the feasibility report Section 4 Figure 5 .
+	
+	\bigskip
+	It is better to drive the transducer via a symmetrical wave, in order to use full swing range of the device. However, since the circuit will be powered via a 9V battery, there won’t be a negative rail. To accomplish this, H BRIDGE EXPLANATION
+	
+	\subsection{Burst Generation}
+	Since transmitting a continuous signal would produce a continuous echo, it is not possible to keep track of the time. Therefore the transmitter should emit bursts of sound waves, and the receiver should keep track of the time between.
+
+To accomplish this, another 555 can be used in astable mode with adjustable duty cycle.
+	
+	\subsection{Transmitter Driver}
+	After obtaining the power requirements of the transmitter, a separate driver IC may be concluded to be necessary. In such case, a simple power amplifier / audio opamp can be used to deliver the necessary power to the transmitter. This driver should be selected such that it is able to operate at the ultrasonic frequencies without distortion. Since the transmitter is driven via two separate timer circuits, two power amplifiers are needed. 
+	
+	\subsection{Receiver Amplifier}
+	During the transmission of the signal, it gets weaker. Since the received signal will be small in amplitude, in order to compensate this loss, it must be amplified to be used in the following blocks.
+	
+	\subsection{Low Pass Filter}
+	Since the incoming echo signal will be a frequency modulated signal, where it consists of an ultrasonic burst filling a pulse, in order to obtain the actual waveform, it is necessary to pass the signal through a low pass filter. After this stage, the ultrasonic part will be discarded and following stages will see only the outlining pulse. This LPF can be a simple passive RC LPF.
+	
+	A passive first order RC low pass filter is designed with corner frequency fc ~= 5kHz. Where input signal consists of a 40kHz carrier and 150 Hz \%0.3 duty pulses. Passing this signal through a LPF enables it to be further passed though a schmitt trigger and recover the digital pulse, resulting in clean fast rising and falling edges, sufficient to trigger the counter.
+
+To encounter attenuation, a schottky diode is placed to prevent capacitor to be discharged over lower value programming resistor, whose value is fixed to get necessary corner frequency. Instead, a bigger bleeder resistor is added in parallel with the capacitor. This allows output signal to rise relatively quickly though the LPF resistor, during “on” times of the input signal, and prevents it discharge though the same resistor during “off” times, and therefore decrease the inevitable attenuation, increasing the voltage level sufficient enough to drive the input of 5V logic schmitt trigger.
+	
+	\subsection{Low Pass Filter}
+	After the LPF, even though the signal will resemble a pulse, it still will be an analogue signal, with slow rising/falling edges and an ambiguous amplitude value. To digitise the signal, it can be fed through a logical schmitt-trigger, output of which will be a truly digital signal. This can be accomplished using generic schmitt-trigger IC such as 74HC14.
+
+	Even though the amplitude value does contain information about surface type and angle, these informations are beyond the scope of this project and therefore can be discarded without any problems in this stage.
+	
+	\subsection{Counter}
+	
+	\subsection{Display Driver}
+	After obtaining a binary representation of distance at the output of the counter, this should be translated in an apropriate with which the 7-segment displays can  be driven. This can be accomplished by means of using a generic “binary to 7-segment” display driver IC such as 74HC4543.
+	
     
-   
+   \pagebreak
     Assuming that the longest distance to be measured is \SI{100}{\centi\metre}, and speed of sound is \SI{343}{\metre\per\second}, the echo would arrive after:
 
     \begin{equation}
@@ -185,8 +220,8 @@
 
     \bigskip
     Commonly available cheap ultrasonic transducers work at frequencies near \SI{40}{\kilo\hertz}. Therefore the transmitter should send bursts of \SI{40}{\kilo\hertz} sound waves, filling in the previously described pulse. In order to provide a signal with these properties, two generators are needed. One to generate the \SI{40}{\kilo\hertz} signal, and another to generate the pulses. The \SI{40}{\kilo\hertz} signal should then be connected to the transmitter via an analogue switch, which is driven by the pulses.
-
-    \pagebreak
+    
+    \bigskip
     On the receiver side, the received signal will most likely be very low in amplitude, therefore the first stage is to amplify it. This amplification should be made such that the lowest possible echo should not fall short of the limits of the next stage, and the highest possible amplitude echo should not exceed it.
     
     \bigskip
@@ -201,111 +236,21 @@
 
     \pagebreak
 
-    \section{Technical Feasibility}
-
-        Since HCSR-04 is a cheap and commonly available product it is easier to desolder and salvage the ultrasonic transduces out of it, instead of looking for parts. However, the transducers are not labelled, marked or named, therefore it is not possible to find relevant information about them. Instead, a working HCSR-04 module is put under test and the signal driving the transmitter of the device is observed with an oscilloscope. 
-
-        \noindent On these images, each channel of the scope is connected to one pin of the transmitter, and the purple waveform is the difference between them.
-
-        \bigskip
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=0.8\textwidth]{experiment1/pulses.png}
-            \caption[]{Pulses}\label{fig:pulses}
-        \end{figure}
-
-        \noindent As it can be seen, the transmitter is driven with periodic, short pulses. Here, it should be kept in mind that this device uses a microcontroller and tries to be smart, it lenghtens the time between pulses when the distance is longer, and shortens it for shorter distances. Therefore the duration between pulses is not really reliable for this experiement. 
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=0.8\textwidth]{experiment1/pulses_close.png}
-            \caption[]{Pulses}\label{fig:pulses}
-        \end{figure}
-
-        \noindent Here, when zoomed into the short bursts, the \SI{40}{\kilo\hertz} ultrasonic frequency signal can be seen. Note that the transmitter is driven symetrically, but the sensor is powered with positive \SI{5}{\volt}, therefore the module has decided to drive the transmitter with alternating \SI{5}{\volt} square pulses on either pin and obtaining a symmetrical \SI{10}{\volt} square wave. 
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=0.8\textwidth]{experiment1/pulses_duration.png}
-            \caption[]{Pulses}\label{fig:pulses}
-        \end{figure}
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=0.8\textwidth]{experiment1/ultrasonic_freq_amplt.png}
-            \caption[]{Pulses}\label{fig:pulses}
-        \end{figure}
-
-
-
-        \pagebreak
-        In order to test the behaviours of transducers, they are desoldered from the module and soldered back on an empty prototyping board. It is necessary to measure what the received signal amplitude will be in order to design a proper amplifier.
-
-        $\SI{10}{\volt}_{\texttt{pp}}$ \SI{40}{\kilo\hertz} sinusoidal signal is applied to the transmitter directly from a function generator and output of the receiver is measured using the oscilloscope. Amplitude of the received signal is observed at various distances. 
-
-        It is observed that the received signal amplitude drops below \SI{100}{\milli\volt} for very large distances (not shown on the pictures). At about 40-50 \SI{}{\centi\metre}, the signal amplitude is about \SI{200}{\milli\volt}, and for very close distances at about 5-10 \SI{}{\centi\metre}, amplitude reaches \SI{800}{\milli\volt}. 
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=\textwidth]{experiment2/setup.jpg}
-            \caption[]{Experiment setup}\label{fig:setup}
-        \end{figure}
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=0.5\textwidth]{experiment2/near.jpg}
-            \caption[]{}\label{fig:near}
-        \end{figure}
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=\textwidth]{experiment2/near_scope.png}
-            \caption[]{}\label{fig:ner_scope}
-        \end{figure}
-
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=0.5\textwidth]{experiment2/medium.jpg}
-            \caption[]{}\label{fig:medium}
-        \end{figure}
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=\textwidth]{experiment2/medium_scope.png}
-            \caption[]{}\label{fig:medium_scope}
-        \end{figure}
-
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=0.5\textwidth]{experiment2/far.jpg}
-            \caption[]{}\label{fig:far}
-        \end{figure}
-
-        \begin{figure}[H]\centering
-            \includegraphics[width=\textwidth]{experiment2/far_scope.png}
-            \caption[]{}\label{fig:far_scope}
-        \end{figure}
-
-
-        
-
-
-
-
-
+    \section{Results}
     
-    \section{Cost Analysis}
+    
+        \pagebreak
+            
+    \section{Needs of the Project / BOMList}
 
-        The following table shows the components to be used based on first draft design of the project. All of these componets and given prices are subject to change as the design is going through revisions and further considerations.
-        
-        \begin{table}[H]\centering
-            \includegraphics[width=\textwidth]{cost.png}
-            \caption[]{Cost Analysis Table}\label{tab:cost}
-        \end{table}
-
-    \section{Risk Feasibility}
-
-        \begin{itemize}
-            \item Since there is not a commonly available specific IC to perform necessary calculation and using an MCU is not allowed, this stage can be tricky to realise.
-            \item Necessary circuitry may be more complex than expected, such that the required design revisions can take too long.
-            \item The received signal may be more noisy than expected, especially in long-range measurements. 
-            \item If the adequate precautions and filtrations are not taken, it can be observed that the margin of error may increase more than allowed.
-        \end{itemize}   
-
+      
     \pagebreak
+     \section{Discussion}
+     
+      \pagebreak
+     \section{Conclusion}
+     
+     \pagebreak
     \section{Gannt Chart}
 
         \begin{figure}[H]\centering
