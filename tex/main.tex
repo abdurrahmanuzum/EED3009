@@ -166,13 +166,15 @@
     \section{Design and Methodology}
     	\subsection{Ultrasonic Frequency Synthesis}
 	
+	    Commonly available ultrasonic transducers work at frequencies near \SI{40}{\kilo\hertz} as tested and confirmed by the experiment in the feasibility report. Therefore the transmitter should send bursts of \SI{40}{\kilo\hertz} sound waves that fill the pulses. In order to provide a signal with these properties, two generators are needed. One to generate the \SI{40}{\kilo\hertz} signal, and another to generate the pulses.
+	    
+	  \bigskip 
 	Synthesizing sinusoidal waves is rather involved and hard. This is usually done digitally by the help of microcontrollers. Since this project does not allow the use of microcontrollers, and there are no readily available sinusoidal signal generator IC’s, it has been decided that driving the transmitter with square waves will suffice. This is also how the HCSR04 module was operating. Refer to the feasibility report Section 4 Figure 5 .
 	
 	\bigskip
-	It is better to drive the transducer via a symmetrical wave, in order to use full swing range of the device. However, since the circuit will be powered via a 9V battery, there won’t be a negative rail. To switch the polarity of voltage H bridge is used. 
-	
-	 \bigskip
-    Commonly available cheap ultrasonic transducers work at frequencies near \SI{40}{\kilo\hertz}. Therefore the transmitter should send bursts of \SI{40}{\kilo\hertz} sound waves, filling in the previously described pulse. In order to provide a signal with these properties, two generators are needed. One to generate the \SI{40}{\kilo\hertz} signal, and another to generate the pulses.  BU SON PARAGRAFI YEDİRMELİSİN. veya sil.
+	It is better to drive the transducer via a symmetrical wave, in order to use full swing range of the device. However, since the circuit will be powered via a 9V battery, there won’t be a negative rail. To switch the polarity of voltage H bridge is used in our design.
+
+
 	\subsection{Burst Generation}
 	Since transmitting a continuous signal would produce a continuous echo, it is not possible to keep track of the time. Therefore the transmitter should emit bursts of sound waves, and the receiver should keep track of the time between.
  	
@@ -196,6 +198,10 @@
 
     \noindent Therefore the width of the pulse should not exceed about \SI{50}{\micro\second}.
 
+ \begin{equation}
+        \texttt{}t_h = \SI{6.42}{\milli\second}
+         \texttt{}t_h = \SI{250}{\micro\second}
+    \end{equation}
 
 	\subsection{Transmitter Driver}
 	After obtaining the power requirements of the transmitter, a separate driver IC may be concluded to be necessary. In such case, a simple power amplifier / audio opamp can be used to deliver the necessary power to the transmitter. This driver should be selected such that it is able to operate at the ultrasonic frequencies without distortion. Since the transmitter is driven via two separate timer circuits, two power amplifiers are needed. 
@@ -206,15 +212,19 @@
 	
 	\subsection{Low Pass Filter}
 	Since the incoming echo signal will be a frequency modulated signal, where it consists of an ultrasonic burst filling a pulse, in order to obtain the actual waveform, it is necessary to pass the signal through a low pass filter. 
-	After this stage, the ultrasonic part will be discarded and following stages will see only the outlining pulse. This LPF can be a simple passive RC LPF.
+	After this stage, the ultrasonic part will be discarded and following stages will see only the outlining pulse. This LPF which is used in our design is a simple passive RC LPF.
 	
 	\bigskip
 	A passive first order RC low pass filter is designed with corner frequency fc \~= 5kHz. Where input signal consists of a 40kHz carrier and 150 Hz \%0.3 duty pulses. Passing this signal through a LPF enables it to be further passed though a schmitt trigger and recover the digital pulse, resulting in clean fast rising and falling edges, sufficient to trigger the counter.
-
-To encounter attenuation, a schottky diode is placed to prevent capacitor to be discharged over lower value programming resistor, whose value is fixed to get necessary corner frequency. Instead, a bigger bleeder resistor is added in parallel with the capacitor. This allows output signal to rise relatively quickly though the LPF resistor, during “on” times of the input signal, and prevents it discharge though the same resistor during “off” times, and therefore decrease the inevitable attenuation, increasing the voltage level sufficient enough to drive the input of 5V logic schmitt trigger.
 	
+	\bigskip
+	To encounter attenuation, a schottky diode is placed to prevent capacitor to be discharged over lower value programming resistor, whose value is fixed to get necessary corner frequency. Instead, a bigger bleeder resistor is added in parallel with the capacitor. This allows output signal to rise relatively quickly though the LPF resistor, during “on” times of the input signal, and prevents it discharge though the same resistor during “off” times, and therefore decrease the inevitable attenuation, increasing the voltage level sufficient enough to drive the input of 5V logic schmitt trigger.
+	
+	 \bigskip
+    After the amplification, the \SI{40}{\kilo\hertz} sound burst should be converted into a regular pulse with digital voltage levels. To accomplish this, firstly the signal should be passed though a lowpass filter with appropriate passband frequency. After which, the signal will resemble a single pulse, albeit with slow-rising edges. Feeding this signal into a logical buffer/schmitt-trigger, the pulse can be converted into a true digital pulse.  APO YAZMIŞ BAK BUNA SONRA
+
 	\subsection{Rectifier/Logical Buffer}
-	After the LPF, even though the signal will resemble a pulse, it still will be an analogue signal, with slow rising/falling edges and an ambiguous amplitude value. To digitise the signal, it can be fed through a logical schmitt-trigger, output of which will be a truly digital signal. This can be accomplished using generic schmitt-trigger IC such as 74HC14.
+	After the LPF, even though the signal will resemble a pulse, it still will be an analogue signal, with slow rising/falling edges and an ambiguous amplitude value. To digitise the signal, it should be fed through a logical schmitt-trigger, output of which will be a truly digital signal. This is accomplished by using a generic schmitt-trigger IC which is 74HC14.
 
 	Even though the amplitude value does contain information about surface type and angle, these informations are beyond the scope of this project and therefore can be discarded without any problems in this stage.
 	
@@ -224,14 +234,6 @@ To encounter attenuation, a schottky diode is placed to prevent capacitor to be 
 	
 	    
    \pagebreak
-   
-   
-    
-       
-    \bigskip
-    After the amplification, the \SI{40}{\kilo\hertz} sound burst should be converted into a regular pulse with digital voltage levels. To accomplish this, firstly the signal should be passed though a lowpass filter with appropriate passband frequency. After which, the signal will resemble a single pulse, albeit with slow-rising edges. Feeding this signal into a logical buffer/schmitt-trigger, the pulse can be converted into a true digital pulse. 
-
-    \pagebreak
 
     \section{Results}
     
@@ -243,6 +245,19 @@ To encounter attenuation, a schottky diode is placed to prevent capacitor to be 
       
     \pagebreak
      \section{Discussion}
+    
+    As mentioned in the Ultrasonic Frequency Synthesis section (section 4), HCSR04 drives the transducers with a symmetrical wave. The first design idea that came to our mind to accomplish this is to use  two square waves with 180 degree phase difference to drive each pin of the transducer. Such that, one pin of the transducer will be kept on 0V where the other is kept at 5V. By alternating this process between the two pins, a differential symmetric 10V square wave can be obtained as shown in figure.
+     
+     To implement this idea to the circuit, two 555 ICs will be driven on monostable mode with 0.25 duty cycle. To synchronise two pulse generators, each IC will be triggered by the falling edge of the other. As a result, a fully differential square wave with twice the frequency of individual pulse generators will be obtained.
+     
+     The reason why this circuit, which we have already designed, is not realized is the trigger pulse must be shorter than the desired
+      $ \texttt{ }t_H$ . In our design, since the output of the first 555 comes to the trigger pin of the other 555, it does not comply with this condition.
+ 
+     
+     \bigskip
+     Period Tuning
+     
+     Since the frequency of the timer circuits will be programmed via passives, in order to avoid errors due to the tolerance of the passives, an adjustment is necessary. This can be achieved by placing trimpots into the programming circuitry, and manually fine-tuning the timing. It would be preferred to be able to adjust both of the individual timers simultaneously.
      
       \pagebreak
      \section{Conclusion}

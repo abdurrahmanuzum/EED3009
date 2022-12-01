@@ -9,8 +9,8 @@
 \contentsline {subsection}{\numberline {4.5}Low Pass Filter}{5}{}%
 \contentsline {subsection}{\numberline {4.6}Rectifier/Logical Buffer}{6}{}%
 \contentsline {subsection}{\numberline {4.7}Counter}{6}{}%
-\contentsline {section}{\numberline {5}Results}{8}{}%
-\contentsline {section}{\numberline {6}Needs of the Project / BOMList}{9}{}%
-\contentsline {section}{\numberline {7}Discussion}{10}{}%
-\contentsline {section}{\numberline {8}Conclusion}{11}{}%
-\contentsline {section}{\numberline {9}Gannt Chart}{12}{}%
+\contentsline {section}{\numberline {5}Results}{7}{}%
+\contentsline {section}{\numberline {6}Needs of the Project / BOMList}{8}{}%
+\contentsline {section}{\numberline {7}Discussion}{9}{}%
+\contentsline {section}{\numberline {8}Conclusion}{10}{}%
+\contentsline {section}{\numberline {9}Gannt Chart}{11}{}%
