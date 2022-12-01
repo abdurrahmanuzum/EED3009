@@ -201,16 +201,15 @@
 	After obtaining the power requirements of the transmitter, a separate driver IC may be concluded to be necessary. In such case, a simple power amplifier / audio opamp can be used to deliver the necessary power to the transmitter. This driver should be selected such that it is able to operate at the ultrasonic frequencies without distortion. Since the transmitter is driven via two separate timer circuits, two power amplifiers are needed. 
 	
 	\subsection{Receiver Amplifier}
-	During the transmission of the signal, it gets weaker. Since the received signal will be small in amplitude, in order to compensate this loss, it must be amplified to be used in the following blocks.
-	
-	 \bigskip
-    On the receiver side, the received signal will most likely be very low in amplitude, therefore the first stage is to amplify it. This amplification should be made such that the lowest possible echo should not fall short of the limits of the next stage, and the highest possible amplitude echo should not exceed it.
+	During the transmission of the signal, it gets weaker.  On the receiver side, the received signal will most likely be small in amplitude, in order to compensate this loss, it must be amplified to be used in the following blocks. This amplification should be made such that the lowest possible echo should not fall short of the limits of the next stage, and the highest possible amplitude echo should not exceed it.
 
 	
 	\subsection{Low Pass Filter}
-	Since the incoming echo signal will be a frequency modulated signal, where it consists of an ultrasonic burst filling a pulse, in order to obtain the actual waveform, it is necessary to pass the signal through a low pass filter. After this stage, the ultrasonic part will be discarded and following stages will see only the outlining pulse. This LPF can be a simple passive RC LPF.
+	Since the incoming echo signal will be a frequency modulated signal, where it consists of an ultrasonic burst filling a pulse, in order to obtain the actual waveform, it is necessary to pass the signal through a low pass filter. 
+	After this stage, the ultrasonic part will be discarded and following stages will see only the outlining pulse. This LPF can be a simple passive RC LPF.
 	
-	A passive first order RC low pass filter is designed with corner frequency fc ~= 5kHz. Where input signal consists of a 40kHz carrier and 150 Hz \%0.3 duty pulses. Passing this signal through a LPF enables it to be further passed though a schmitt trigger and recover the digital pulse, resulting in clean fast rising and falling edges, sufficient to trigger the counter.
+	\bigskip
+	A passive first order RC low pass filter is designed with corner frequency fc \~= 5kHz. Where input signal consists of a 40kHz carrier and 150 Hz \%0.3 duty pulses. Passing this signal through a LPF enables it to be further passed though a schmitt trigger and recover the digital pulse, resulting in clean fast rising and falling edges, sufficient to trigger the counter.
 
 To encounter attenuation, a schottky diode is placed to prevent capacitor to be discharged over lower value programming resistor, whose value is fixed to get necessary corner frequency. Instead, a bigger bleeder resistor is added in parallel with the capacitor. This allows output signal to rise relatively quickly though the LPF resistor, during “on” times of the input signal, and prevents it discharge though the same resistor during “off” times, and therefore decrease the inevitable attenuation, increasing the voltage level sufficient enough to drive the input of 5V logic schmitt trigger.
 	
