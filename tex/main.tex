@@ -171,11 +171,14 @@
 	  \bigskip 
 	Synthesizing sinusoidal waves is rather involved and hard. This is usually done digitally by the help of microcontrollers. Since this project does not allow the use of microcontrollers, and there are no readily available sinusoidal signal generator IC’s, it has been decided that driving the transmitter with square waves will suffice. This is also how the HCSR04 module was operating. Refer to the feasibility report Section 4 Figure 5 .
 	
-	\bigskip
+	\subsection{Transmitter Driver}
+		
 	It is better to drive the transducer via a symmetrical wave, in order to use full swing range of the device. However, since the circuit will be powered via a 9V battery, there won’t be a negative rail. To switch the polarity of voltage H bridge is used in our design.
+	
+	\bigskip
+	After obtaining the power requirements of the transmitter, a separate driver IC may be concluded to be necessary. In such case, a simple power amplifier / audio opamp can be used to deliver the necessary power to the transmitter. This driver should be selected such that it is able to operate at the ultrasonic frequencies without distortion. Since the transmitter is driven via two separate timer circuits, two power amplifiers are needed. 
 
-
-	\subsection{Burst Generation}
+		\subsection{Burst Generation}
 	Since transmitting a continuous signal would produce a continuous echo, it is not possible to keep track of the time. Therefore the transmitter should emit bursts of sound waves, and the receiver should keep track of the time between.
  	
 	\bigskip
@@ -203,12 +206,11 @@
          \texttt{}t_h = \SI{250}{\micro\second}
     \end{equation}
 
-	\subsection{Transmitter Driver}
-	After obtaining the power requirements of the transmitter, a separate driver IC may be concluded to be necessary. In such case, a simple power amplifier / audio opamp can be used to deliver the necessary power to the transmitter. This driver should be selected such that it is able to operate at the ultrasonic frequencies without distortion. Since the transmitter is driven via two separate timer circuits, two power amplifiers are needed. 
 	
 	\subsection{Receiver Amplifier}
-	During the transmission of the signal, it gets weaker.  On the receiver side, the received signal will most likely be small in amplitude, in order to compensate this loss, it must be amplified to be used in the following blocks. This amplification should be made such that the lowest possible echo should not fall short of the limits of the next stage, and the highest possible amplitude echo should not exceed it.
-
+	During the transmission of the signal, it gets weaker.  On the receiver side, the received signal will most likely be small in amplitude, in order to compensate this loss, it must be amplified to be used in the following blocks. 
+	
+	This amplification should be made such that the lowest possible echo should not fall short of the limits of the next stage, and the highest possible amplitude echo should not exceed it.  For this reason, it was deemed appropriate to use an instrumentation amplifier. 
 	
 	\subsection{Low Pass Filter}
 	Since the incoming echo signal will be a frequency modulated signal, where it consists of an ultrasonic burst filling a pulse, in order to obtain the actual waveform, it is necessary to pass the signal through a low pass filter. 

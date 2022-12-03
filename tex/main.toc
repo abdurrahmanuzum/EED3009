@@ -3,8 +3,8 @@
 \contentsline {section}{\numberline {3}Overview of the Project}{3}{}%
 \contentsline {section}{\numberline {4}Design and Methodology}{4}{}%
 \contentsline {subsection}{\numberline {4.1}Ultrasonic Frequency Synthesis}{4}{}%
-\contentsline {subsection}{\numberline {4.2}Burst Generation}{4}{}%
-\contentsline {subsection}{\numberline {4.3}Transmitter Driver}{5}{}%
+\contentsline {subsection}{\numberline {4.2}Transmitter Driver}{4}{}%
+\contentsline {subsection}{\numberline {4.3}Burst Generation}{4}{}%
 \contentsline {subsection}{\numberline {4.4}Receiver Amplifier}{5}{}%
 \contentsline {subsection}{\numberline {4.5}Low Pass Filter}{5}{}%
 \contentsline {subsection}{\numberline {4.6}Rectifier/Logical Buffer}{6}{}%
